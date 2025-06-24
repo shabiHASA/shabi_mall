@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>♡ Kawaii Pink Mall ♡</title>
+    <title>♡ Kawaii Shabi Mall ♡</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
         
@@ -704,7 +704,7 @@
         <!-- Header -->
         <div class="window header-window">
             <div class="window-header">
-                <span class="window-title">🏪 Kawaii Pink Mall</span>
+                <span class="window-title">🎀 Kawaii Shabi Mall</span>
                 <div class="window-controls">
                     <div class="control-btn minimize">-</div>
                     <div class="control-btn maximize">□</div>
@@ -712,17 +712,17 @@
                 </div>
             </div>
             <div class="header-content">
-                <div class="logo">✨ KAWAII MALL ✨</div>
-                <p>세상에서 가장 귀여운 쇼핑몰에 오신 걸 환영해요! 💕</p>
+                <div class="logo">✨ KAWAII SHABI MALL ✨</div>
+                <p>쇼비샤핑! 샤비 전용 쇼핑몰 샤비몰입니다~💕</p>
                 
                 <div class="nav-menu">
-                    <button class="nav-btn" onclick="filterProducts('all')">🏠 전체</button>
-                    <button class="nav-btn" onclick="filterProducts('fashion')">👗 패션</button>
-                    <button class="nav-btn" onclick="filterProducts('beauty')">💄 뷰티</button>
-                    <button class="nav-btn" onclick="filterProducts('accessories')">💍 액세서리</button>
-                    <button class="nav-btn" onclick="filterProducts('stationery')">📝 문구</button>
+                    <button class="nav-btn" onclick="filterProducts('all')">전체</button>
+                    <button class="nav-btn" onclick="filterProducts('fashion')">패션</button>
+                    <button class="nav-btn" onclick="filterProducts('beauty')">뷰티</button>
+                    <button class="nav-btn" onclick="filterProducts('accessories')">식품</button>
+                    <button class="nav-btn" onclick="filterProducts('stationery')">잡화</button>
                     <button class="nav-btn" onclick="openCart()">
-                        🛒 장바구니
+                        장바구니
                         <span class="cart-indicator" id="cartCount">0</span>
                     </button>
                 </div>
@@ -732,7 +732,7 @@
         <!-- Products -->
         <div class="window">
             <div class="window-header">
-                <span class="window-title">💝 인기 상품</span>
+                <span class="window-title">인기 상품</span>
                 <div class="window-controls">
                     <div class="control-btn minimize">-</div>
                     <div class="control-btn maximize">□</div>
@@ -749,7 +749,7 @@
     <div class="product-modal" id="productModal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="window-title">💝 상품 상세보기</span>
+                <span class="window-title">🎀 상품 상세보기</span>
                 <button class="modal-close" onclick="closeProductModal()">×</button>
             </div>
             <div class="modal-body" id="modalBody">
@@ -761,7 +761,7 @@
     <!-- Shopping Cart Sidebar -->
     <div class="sidebar" id="cartSidebar">
         <div class="sidebar-header">
-            <h3>🛒 장바구니</h3>
+            <h3>장바구니</h3>
             <button onclick="closeCart()" style="background: none; border: none; font-size: 20px; cursor: pointer; float: right; color: #be185d;">×</button>
         </div>
         <div class="sidebar-content">
@@ -921,7 +921,7 @@
         // Create stars background
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const starSymbols = ['✨', '⭐', '💫', '🌟', '💝', '💖', '🎀', '🌸'];
+            const starSymbols = ['💕', '💗', '🩷', '🤍', '🎀', '🌸'];
             
             for (let i = 0; i < 40; i++) {
                 const star = document.createElement('div');
@@ -949,7 +949,7 @@
                     <div class="product-rating">${'⭐'.repeat(product.rating)}</div>
                     <div class="product-price">₩${product.price.toLocaleString()}</div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
-                        🛒 장바구니에 추가
+                        장바구니에 추가
                     </button>
                 </div>
             `).join('');
@@ -1058,17 +1058,18 @@
         // Checkout
         function checkout() {
             if (cart.length === 0) {
-                showNotification('장바구니가 비어있어요! 🥺');
+                showNotification('장바구니가 비어있어요!');
                 return;
             }
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            showNotification(`결제가 완료되었습니다! 총 ₩${total.toLocaleString()} 💳✨`);
+            showNotification(`결제가 완료되었습니다! 총 ₩${total.toLocaleString()} 
+`);
             
             // Create celebration effect
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
-                    createSparkleEffect(document.body, ['🎉', '💕', '✨', '🌟'][Math.floor(Math.random() * 4)]);
+                    createSparkleEffect(document.body, ['🎉', '💕', '✨️', '🎀'][Math.floor(Math.random() * 4)]);
                 }, i * 100);
             }
             
@@ -1122,7 +1123,7 @@
                     <div class="modal-description">${product.description}</div>
                     
                     <div class="modal-details">
-                        <h4>🛍️ 상품 정보</h4>
+                        <h4>상품 정보</h4>
                         <ul>
                             ${product.details.map(detail => `<li>${detail}</li>`).join('')}
                         </ul>
@@ -1130,7 +1131,7 @@
                     
                     <div class="modal-actions">
                         <button class="modal-add-to-cart" onclick="addToCart(${product.id}); showNotification('${product.name}이(가) 장바구니에 추가되었습니다! 💕');">
-                            🛒 장바구니에 추가
+                            장바구니에 추가
                         </button>
                     </div>
                 </div>
