@@ -104,8 +104,8 @@
         }
 
         .close { background: #f472b6; }
-        .minimize { background: #fbbf24; }
-        .maximize { background: #34d399; }
+        .minimize { background: #fbb6ce; color: #be185d; }
+        .maximize { background: #f9a8d4; color: #be185d; }
 
         .control-btn:hover {
             transform: scale(1.2);
@@ -144,6 +144,7 @@
             gap: 20px;
             margin: 20px 0;
             flex-wrap: wrap;
+            padding: 0 20px;
         }
 
         .nav-btn {
@@ -158,7 +159,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(249, 168, 212, 0.3);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .nav-btn:hover {
@@ -168,18 +169,21 @@
 
         .cart-indicator {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: -8px;
+            right: -8px;
             background: #f472b6;
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 10px;
+            width: 24px;
+            height: 24px;
+            font-size: 12px;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             animation: pulse 2s infinite;
+            box-shadow: 0 2px 8px rgba(244, 114, 182, 0.4);
+            z-index: 10;
         }
 
         @keyframes pulse {
@@ -216,21 +220,23 @@
         .product-image {
             width: 100%;
             height: 200px;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 4px,
-                rgba(249, 168, 212, 0.1) 4px,
-                rgba(249, 168, 212, 0.1) 8px
-            );
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
             margin-bottom: 15px;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(45deg, #fce7f3, #f9d2e4);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-image::after {
@@ -294,15 +300,17 @@
 
         .sale-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: #f472b6;
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
+            padding: 8px 12px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
             animation: bounce 2s infinite;
+            box-shadow: 0 4px 12px rgba(244, 114, 182, 0.4);
+            z-index: 5;
         }
 
         @keyframes bounce {
@@ -350,12 +358,15 @@
         .cart-item-image {
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, #f9a8d4, #fbb6ce);
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #f9a8d4, #fbb6ce);
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .cart-item-info {
@@ -471,6 +482,183 @@
             }
         }
 
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(253, 242, 248, 0.95);
+            border: 3px solid #f9a8d4;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 60px rgba(249, 168, 212, 0.4);
+            max-width: 800px;
+            max-height: 90vh;
+            width: 90%;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            0% {
+                transform: scale(0.8) translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, #f9a8d4, #fbb6ce, #fce7f3);
+            padding: 15px 20px;
+            border-bottom: 2px solid #f472b6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: #f472b6;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #be185d;
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #fce7f3, #f9d2e4);
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .modal-info h2 {
+            color: #be185d;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .modal-price {
+            font-size: 28px;
+            color: #f472b6;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .modal-rating {
+            color: #fbbf24;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            color: #be185d;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .modal-details {
+            background: rgba(249, 168, 212, 0.1);
+            border: 1px solid #f9a8d4;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .modal-details h4 {
+            color: #be185d;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .modal-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-details li {
+            color: #be185d;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .modal-details li:before {
+            content: '💕';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .modal-add-to-cart {
+            flex: 1;
+            background: linear-gradient(135deg, #f472b6, #f9a8d4);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            color: white;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-add-to-cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(244, 114, 182, 0.4);
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
@@ -489,6 +677,21 @@
             .nav-btn {
                 padding: 8px 16px;
                 font-size: 12px;
+            }
+            
+            .modal-body {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+            
+            .modal-image img {
+                height: 250px;
             }
         }
     </style>
@@ -542,6 +745,19 @@
         </div>
     </div>
 
+    <!-- Product Detail Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="window-title">💝 상품 상세보기</span>
+                <button class="modal-close" onclick="closeProductModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Shopping Cart Sidebar -->
     <div class="sidebar" id="cartSidebar">
         <div class="sidebar-header">
@@ -567,18 +783,129 @@
     <script>
         // Product data
         const products = [
-            { id: 1, name: '핑크 하트 드레스', price: 89000, emoji: '👗', category: 'fashion', rating: 5 },
-            { id: 2, name: '글리터 립글로스', price: 15000, emoji: '💄', category: 'beauty', rating: 4, sale: true },
-            { id: 3, name: '유니콘 헤어핀', price: 8000, emoji: '🦄', category: 'accessories', rating: 5 },
-            { id: 4, name: '홀로그램 스티커', price: 3000, emoji: '✨', category: 'stationery', rating: 4 },
-            { id: 5, name: '레이스 블라우스', price: 65000, emoji: '👕', category: 'fashion', rating: 4 },
-            { id: 6, name: '파스텔 아이섀도', price: 25000, emoji: '🎨', category: 'beauty', rating: 5, sale: true },
-            { id: 7, name: '진주 목걸이', price: 45000, emoji: '📿', category: 'accessories', rating: 5 },
-            { id: 8, name: '고양이 볼펜 세트', price: 12000, emoji: '🐱', category: 'stationery', rating: 4 },
-            { id: 9, name: '튤 스커트', price: 55000, emoji: '🩰', category: 'fashion', rating: 4 },
-            { id: 10, name: '하트 체크', price: 18000, emoji: '💗', category: 'beauty', rating: 5 },
-            { id: 11, name: '리본 헤어밴드', price: 12000, emoji: '🎀', category: 'accessories', rating: 4 },
-            { id: 12, name: '무지개 마커', price: 20000, emoji: '🌈', category: 'stationery', rating: 5, sale: true }
+            { 
+                id: 1, 
+                name: '핑크 하트 드레스', 
+                price: 89000, 
+                image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=300&fit=crop', 
+                category: 'fashion', 
+                rating: 5,
+                description: '로맨틱한 하트 패턴이 돋보이는 핑크 드레스입니다. 부드러운 소재로 편안한 착용감을 제공하며, 데이트룩이나 특별한 날에 완벽한 아이템이에요.',
+                details: ['소재: 폴리에스터 100%', '사이즈: S, M, L', '세탁방법: 드라이클리닝 권장', '원산지: 한국']
+            },
+            { 
+                id: 2, 
+                name: '글리터 립글로스', 
+                price: 15000, 
+                image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300&h=300&fit=crop', 
+                category: 'beauty', 
+                rating: 4, 
+                sale: true,
+                description: '반짝이는 글리터가 매력적인 립글로스입니다. 촉촉한 보습 효과와 함께 입술에 화려한 포인트를 연출해줘요.',
+                details: ['용량: 4.5ml', '색상: 핑크 글리터', '성분: 비건 포뮬라', '사용기한: 개봉 후 12개월']
+            },
+            { 
+                id: 3, 
+                name: '유니콘 헤어핀', 
+                price: 8000, 
+                image: 'https://images.unsplash.com/photo-1515688594390-b649af70d282?w=300&h=300&fit=crop', 
+                category: 'accessories', 
+                rating: 5,
+                description: '마법같은 유니콘 모티브의 헤어핀 세트입니다. 홀로그램 효과로 각도에 따라 다양한 색상을 연출해요.',
+                details: ['구성: 헤어핀 3개 세트', '소재: 합금, 에나멜', '크기: 5cm x 2cm', '연령: 전 연령 사용 가능']
+            },
+            { 
+                id: 4, 
+                name: '홀로그램 스티커', 
+                price: 3000, 
+                image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=300&h=300&fit=crop', 
+                category: 'stationery', 
+                rating: 4,
+                description: '반짝이는 홀로그램 효과의 스티커 팩입니다. 다이어리나 노트북을 꾸미기에 완벽한 아이템이에요.',
+                details: ['구성: 스티커 20매', '크기: 다양한 사이즈', '재질: 홀로그램 필름', '방수: 생활방수 가능']
+            },
+            { 
+                id: 5, 
+                name: '레이스 블라우스', 
+                price: 65000, 
+                image: 'https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?w=300&h=300&fit=crop', 
+                category: 'fashion', 
+                rating: 4,
+                description: '우아한 레이스 디테일이 아름다운 블라우스입니다. 오피스룩부터 데이트룩까지 다양하게 연출 가능해요.',
+                details: ['소재: 코튼 60%, 레이온 40%', '사이즈: XS, S, M, L', '색상: 화이트, 크림', '관리: 손세탁 권장']
+            },
+            { 
+                id: 6, 
+                name: '파스텔 아이섀도', 
+                price: 25000, 
+                image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=300&h=300&fit=crop', 
+                category: 'beauty', 
+                rating: 5, 
+                sale: true,
+                description: '부드러운 파스텔 톤의 아이섀도 팔레트입니다. 자연스러운 그라데이션 연출이 가능한 9색 구성이에요.',
+                details: ['구성: 9색 팔레트', '타입: 매트 + 쉬머', '크기: 15cm x 10cm', '브러시: 미러 + 브러시 포함']
+            },
+            { 
+                id: 7, 
+                name: '진주 목걸이', 
+                price: 45000, 
+                image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&h=300&fit=crop', 
+                category: 'accessories', 
+                rating: 5,
+                description: '고급스러운 진주가 연결된 클래식한 목걸이입니다. 어떤 의상에도 우아함을 더해주는 필수 액세서리예요.',
+                details: ['소재: 인조진주, 실버 체인', '길이: 45cm (조절 가능)', '보관: 전용 파우치 포함', '알레르기: 니켈프리']
+            },
+            { 
+                id: 8, 
+                name: '고양이 볼펜 세트', 
+                price: 12000, 
+                image: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=300&h=300&fit=crop', 
+                category: 'stationery', 
+                rating: 4,
+                description: '귀여운 고양이 캐릭터가 그려진 볼펜 세트입니다. 부드러운 필기감과 함께 일상에 즐거움을 더해줘요.',
+                details: ['구성: 볼펜 5개 세트', '잉크: 블랙 0.5mm', '길이: 14cm', '특징: 지우개 캡 포함']
+            },
+            { 
+                id: 9, 
+                name: '튤 스커트', 
+                price: 55000, 
+                image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop', 
+                category: 'fashion', 
+                rating: 4,
+                description: '공주님처럼 우아한 튤 소재의 스커트입니다. 볼륨감 있는 실루엣으로 로맨틱한 스타일링이 가능해요.',
+                details: ['소재: 튤 100%', '길이: 미디 기장', '허리: 밴딩 처리', '안감: 별도 안감 포함']
+            },
+            { 
+                id: 10, 
+                name: '하트 체크', 
+                price: 18000, 
+                image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300&h=300&fit=crop', 
+                category: 'beauty', 
+                rating: 5,
+                description: '사랑스러운 하트 모양의 블러셔입니다. 자연스러운 혈색을 연출하며 피부에 생기를 더해줘요.',
+                details: ['타입: 파우더 블러셔', '색상: 코랄 핑크', '용량: 8g', '브러시: 전용 브러시 포함']
+            },
+            { 
+                id: 11, 
+                name: '리본 헤어밴드', 
+                price: 12000, 
+                image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=300&h=300&fit=crop', 
+                category: 'accessories', 
+                rating: 4,
+                description: '큰 리본이 포인트인 헤어밴드입니다. 머리를 예쁘게 정리하면서 스타일링 포인트도 함께 연출해요.',
+                details: ['소재: 새틴 리본', '색상: 핑크, 화이트', '조절: 고무줄로 조절 가능', '관리: 손세탁 권장']
+            },
+            { 
+                id: 12, 
+                name: '무지개 마커', 
+                price: 20000, 
+                image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=300&h=300&fit=crop', 
+                category: 'stationery', 
+                rating: 5, 
+                sale: true,
+                description: '생생한 무지개 색상의 마커 세트입니다. 그림 그리기나 필기에 활용하기 좋은 고품질 마커예요.',
+                details: ['구성: 12색 마커 세트', '팁: 트윈팁 (굵은펜/가는펜)', '잉크: 수성 안료', '케이스: 플라스틱 케이스 포함']
+            }
         ];
 
         let cart = [];
@@ -613,13 +940,15 @@
             const filteredProducts = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
             
             grid.innerHTML = filteredProducts.map(product => `
-                <div class="product-card" data-category="${product.category}">
+                <div class="product-card" data-category="${product.category}" onclick="showProductDetail(${product.id})">
                     ${product.sale ? '<div class="sale-badge">SALE</div>' : ''}
-                    <div class="product-image">${product.emoji}</div>
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    </div>
                     <div class="product-name">${product.name}</div>
                     <div class="product-rating">${'⭐'.repeat(product.rating)}</div>
                     <div class="product-price">₩${product.price.toLocaleString()}</div>
-                    <button class="add-to-cart" onclick="addToCart(${product.id})">
+                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
                         🛒 장바구니에 추가
                     </button>
                 </div>
@@ -685,7 +1014,9 @@
             
             container.innerHTML = cart.map(item => `
                 <div class="cart-item">
-                    <div class="cart-item-image">${item.emoji}</div>
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
                     <div class="cart-item-info">
                         <div style="font-weight: 600; margin-bottom: 5px;">${item.name}</div>
                         <div style="color: #f472b6; font-weight: 700;">₩${item.price.toLocaleString()}</div>
@@ -773,6 +1104,54 @@
             document.body.appendChild(sparkle);
             setTimeout(() => sparkle.remove(), 2000);
         }
+
+        // Show product detail modal
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="modal-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="modal-info">
+                    <h2>${product.name}</h2>
+                    <div class="modal-price">₩${product.price.toLocaleString()}</div>
+                    <div class="modal-rating">${'⭐'.repeat(product.rating)} (${product.rating}/5)</div>
+                    <div class="modal-description">${product.description}</div>
+                    
+                    <div class="modal-details">
+                        <h4>🛍️ 상품 정보</h4>
+                        <ul>
+                            ${product.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button class="modal-add-to-cart" onclick="addToCart(${product.id}); showNotification('${product.name}이(가) 장바구니에 추가되었습니다! 💕');">
+                            🛒 장바구니에 추가
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('productModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close product modal
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('productModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProductModal();
+            }
+        });
 
         // Close overlay when clicked
         document.getElementById('overlay').addEventListener('click', closeCart);
