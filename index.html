@@ -452,9 +452,11 @@
             padding: 15px 20px;
             border-radius: 10px;
             font-weight: 600;
-            transform: translateX(400px);
+            transform: translateX(500px);
             transition: transform 0.3s ease;
             z-index: 1001;
+            max-width: 300px;
+            word-wrap: break-word;
         }
 
         .notification.show {
@@ -761,7 +763,7 @@
     <!-- Shopping Cart Sidebar -->
     <div class="sidebar" id="cartSidebar">
         <div class="sidebar-header">
-            <h3>🛒 장바구니</h3>
+            <h3>장바구니</h3>
             <button onclick="closeCart()" style="background: none; border: none; font-size: 20px; cursor: pointer; float: right; color: #be185d;">×</button>
         </div>
         <div class="sidebar-content">
@@ -771,7 +773,7 @@
                     총 금액: <span id="totalAmount">₩0</span>
                 </div>
                 <button class="checkout-btn" onclick="checkout()">
-                    💳 결제하기
+                    결제하기
                 </button>
             </div>
         </div>
@@ -921,7 +923,7 @@
         // Create stars background
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const starSymbols = ['✨', '⭐', '💫', '🌟', '💝', '💖', '🎀', '🌸'];
+            const starSymbols = ['✨', '💕', '🤍', '🩷', '💗', '💖', '🎀', '🌸'];
             
             for (let i = 0; i < 40; i++) {
                 const star = document.createElement('div');
