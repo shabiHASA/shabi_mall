@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>♡ Kawaii Pink Mall ♡</title>
+    <title>♡ Shabi Mall ♡</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
         
@@ -712,15 +712,15 @@
                 </div>
             </div>
             <div class="header-content">
-                <div class="logo">✨ KAWAII MALL ✨</div>
-                <p>세상에서 가장 귀여운 쇼핑몰에 오신 걸 환영해요! 💕</p>
+                <div class="logo">✨ SHABI MALL ✨</div>
+                <p> 미소녀에겐 미소녀쇼핑몰이 필요해! 쇼비샤핑 💕</p>
                 
                 <div class="nav-menu">
-                    <button class="nav-btn" onclick="filterProducts('all')">🏠 전체</button>
-                    <button class="nav-btn" onclick="filterProducts('fashion')">👗 패션</button>
-                    <button class="nav-btn" onclick="filterProducts('beauty')">💄 뷰티</button>
-                    <button class="nav-btn" onclick="filterProducts('accessories')">💍 액세서리</button>
-                    <button class="nav-btn" onclick="filterProducts('stationery')">📝 문구</button>
+                    <button class="nav-btn" onclick="filterProducts('all')">전체</button>
+                    <button class="nav-btn" onclick="filterProducts('fashion')">패션</button>
+                    <button class="nav-btn" onclick="filterProducts('beauty')">뷰티</button>
+                    <button class="nav-btn" onclick="filterProducts('accessories')">식품</button>
+                    <button class="nav-btn" onclick="filterProducts('stationery')">잡화</button>
                     <button class="nav-btn" onclick="openCart()">
                         🛒 장바구니
                         <span class="cart-indicator" id="cartCount">0</span>
@@ -732,7 +732,7 @@
         <!-- Products -->
         <div class="window">
             <div class="window-header">
-                <span class="window-title">💝 인기 상품</span>
+                <span class="window-title">🎀 인기 상품</span>
                 <div class="window-controls">
                     <div class="control-btn minimize">-</div>
                     <div class="control-btn maximize">□</div>
@@ -749,7 +749,7 @@
     <div class="product-modal" id="productModal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="window-title">💝 상품 상세보기</span>
+                <span class="window-title">🎀 상품 상세보기</span>
                 <button class="modal-close" onclick="closeProductModal()">×</button>
             </div>
             <div class="modal-body" id="modalBody">
@@ -921,7 +921,7 @@
         // Create stars background
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const starSymbols = ['✨', '⭐', '💫', '🌟', '💝', '💖', '🎀', '🌸'];
+            const starSymbols = ['✨', '🤍', '🩷', '💝', '💖', '🎀', '🌸'];
             
             for (let i = 0; i < 40; i++) {
                 const star = document.createElement('div');
